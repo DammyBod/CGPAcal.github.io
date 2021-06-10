@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+    <script type="module">
+        import { alertController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
+        window.alertController = alertController;
+    </script>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <!-- Building an app that calculates the cumulate grade points average of users with ionic 
+        and Vanilla JavaScript without the implementation any JS framework or library -->
+    <ion-app>
+        <ion-header translucent>
+            <ion-toolbar color="primary">
+                <ion-title>CGPA Calculator</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <ion-grid id="userDetails">
+                <ion-row>
+                    <ion-col size-md="6" offset-md="3">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title class="ion-margin">
+                                    User Details
+                                </ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-item>
+                                    <ion-label position="floating">First Name</ion-label>
+                                    <ion-input type="text" id="input-firstName" placeholder="Enter your first name">
+                                    </ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Institution Name</ion-label>
+                                    <ion-input type="text" id="input-institutionName"
+                                        placeholder="Enter your institution name"></ion-input>
+                                </ion-item>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-md="6" offset-md="3">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title>Grade Scale</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-item>
+                                    <p><b>Enter the minimum score for each grade. E.G. 80 is the minimum score for A in
+                                            Babcock University and 60 is the minimum score for B.</b></p>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">A</ion-label>
+                                    <ion-input type="number" id="grade-A" placeholder="Enter Score"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">B</ion-label>
+                                    <ion-input type="number" id="grade-B" placeholder="Enter Score"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">C</ion-label>
+                                    <ion-input type="number" id="grade-C" placeholder="Enter Score"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">D</ion-label>
+                                    <ion-input type="number" id="grade-D" placeholder="Enter Score"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">E</ion-label>
+                                    <ion-input type="number" id="grade-E" placeholder="Enter Score"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">F</ion-label>
+                                    <ion-input type="number" id="grade-F" placeholder="Enter Score"></ion-input>
+                                </ion-item>
+                                <div class="ion-padding">
+                                    <ion-button fill="outline" color="danger" id="btn-cancel1">
+                                        <ion-icon slot="start" name="close"></ion-icon>
+                                        Clear
+                                    </ion-button>
+                                    <ion-button id="btn-ok">
+                                        <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
+                                        OK
+                                    </ion-button>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid id="userDetailsO">
+                <ion-row>
+                    <ion-col>
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title>User Details</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-row>
+                                    <ion-col size-md="6" offset-md="3">
+                                        <ion-list id="userDetailsOutput"></ion-list>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col size-md="6" offset-md="3">
+                                        <ion-list id="userDetailsOutput1"></ion-list>
+                                    </ion-col>
+                                </ion-row>
+                                <div class="ion-padding">
+                                    <ion-button id="btn-next">
+                                        <ion-icon name="play-skip-forward-circle-outline" slot="start"></ion-icon>
+                                        NEXT
+                                    </ion-button>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-grid id="courseDetails">
+                <ion-row>
+                    <ion-col size-md="6" offset-md="3">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title class="ion-margin">Course Details</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-item>
+                                    <ion-label position="floating">Course Code</ion-label>
+                                    <ion-input type="text" id="input-course" placeholder="Enter Course Title">
+                                    </ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Score</ion-label>
+                                    <ion-input type="number" id="input-score" placeholder="Enter Course Score">
+                                    </ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Credit Unit</ion-label>
+                                    <ion-input type="number" id="input-unit" placeholder="Enter Credit Unit">
+                                    </ion-input>
+                                </ion-item>
+                                <div class="ion-padding">
+                                    <ion-button fill="outline" color="danger" id="btn-cancel">
+                                        <ion-icon slot="start" name="close"></ion-icon>
+                                        Clear
+                                    </ion-button>
+                                    <ion-button id="btn-confirm">
+                                        <ion-icon slot="start" name="add-outline"></ion-icon>
+                                        Add Course
+                                    </ion-button>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-md="6" offset-md="3">
+                        <ion-list id="courseList1"></ion-list>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid id="courseDetailsO">
+                <ion-row>
+                    <ion-col size-md="6" offset-md="3">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title>Course List</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-row>
+                                    <ion-col size-md="6" offset-md="3">
+                                        <ion-list id="courseList"></ion-list>
+                                    </ion-col>
+                                </ion-row>
+                                <div class="ion-padding">
+                                    <ion-button id="btn-calc">
+                                        <ion-icon name="calculator-outline" slot="start"></ion-icon>
+                                        CALCULATE
+                                    </ion-button>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid id="output">
+                <ion-row>
+                    <ion-col size-md="6" offset-md="3">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title>Cumulative Grade Point Average</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-row>
+                                    <ion-col size-md="6" offset-md="3">
+                                        <ion-list id="semesterCourseList"></ion-list>
+                                        <P class="ion-margin">Total Grade Point: <span id="total-gp"></span></P>
+                                        <P class="ion-margin">Total Credit Unit: <span id="total-cu"></span></P>
+                                        <P class="ion-margin">Cumulative Grade Point Average: <span id="cgpa"></span>
+                                        </P>
+                                    </ion-col>
+                                </ion-row>
+                                <div class="ion-padding">
+                                    <ion-button id="btn-done">
+                                        <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
+                                        DONE
+                                    </ion-button>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-content>
+        <ion-alert-controller></ion-alert-controller>
+    </ion-app>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
